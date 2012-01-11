@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me
 
-  validates_presence_of :first_name, :last_name, :email
+  #validates_presence_of :first_name, :last_name, :email
 
   has_many :locations
 
