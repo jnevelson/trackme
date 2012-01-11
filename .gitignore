@@ -3,3 +3,4 @@
 /.rspec
 /.idea/*
 /tmp/*
+.rvmrc
