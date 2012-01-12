@@ -4,4 +4,5 @@ Devise.setup do |config|
   config.strip_whitespace_keys = [ :email ]
   config.use_salt_as_remember_token = true
   config.reset_password_within = 2.hours
+  config.password_length = 4..20
 end

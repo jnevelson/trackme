@@ -1,1 +1,5 @@
-<h1>HELLO WORLD</h1>
+<% if user_signed_in? %>
+  <%= current_user.inspect %>
+<% else %>
+  <h1>FAIL</h1>
+<% end %>
