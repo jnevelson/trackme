@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -15,8 +14,8 @@ class User < ActiveRecord::Base
   private
 
   def generate_api_key!
-    key = [Time.now, (1..10).map { rand.to_s }]
-    self.api_key = Digest::SHA1.hexdigest(key.join("--"))
+    key = [Time.now, (1..10).map { rand.to_s }].join("--")
+    self.api_key = Digest::SHA1.hexdigest(key)
   end
 
 end
