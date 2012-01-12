@@ -10,4 +10,13 @@ class User < ActiveRecord::Base
 
   has_many :locations
 
+  before_save :generate_api_key!
+
+  private
+
+  def generate_api_key!
+    key = [Time.now, (1..10).map { rand.to_s }]
+    self.api_key = Digest::SHA1.hexdigest(key.join("--"))
+  end
+
 end
