@@ -18,4 +18,11 @@ describe User do
     @user.api_key.should_not equal(nil)
   end
 
+  it "should create new locations belonging to current user" do
+    @user = Factory.build(:user)
+    params = { :latitude => 37.75412, :longitude => -122.45121 }
+    @user.post_location(params)
+    @user.locations.first.longitude.should equal params[:longitude]
+  end
+
 end

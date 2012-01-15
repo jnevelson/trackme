@@ -11,6 +11,11 @@ class User < ActiveRecord::Base
 
   before_save :generate_api_key!
 
+  def post_location(params = {})
+    params.merge! :user => self
+    Location.create!(params)
+  end
+
   private
 
   def generate_api_key!
