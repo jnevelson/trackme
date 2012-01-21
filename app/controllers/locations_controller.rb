@@ -1,8 +1,8 @@
-class LocationController < ApplicationController
+class LocationsController < ApplicationController
 
   before_filter :validate_user
 
-  def new
+  def create
     raise "Must include longitude and latitude!" unless location_included?
     @user.post_location(params)
   end
