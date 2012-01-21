@@ -10,15 +10,11 @@ class LocationsController < ApplicationController
         @errors << e.message
       end
     end
-    status = @errors.empty? ? "Location posted!\n" : "Error posting location: #{@errors}"
+    status = @errors.empty? ? "Location posted!\n" : "Error posting location: #{@errors}\n"
     render :text => status
   end
 
   private
-
-  def location_included?
-    !!params[:longitude] && !!params[:latitude]
-  end
 
   def validate_user
     @user = User.find_by_api_key(params[:api_key])
