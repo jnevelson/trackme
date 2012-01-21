@@ -2,7 +2,7 @@
 
 There's still nothing functional here. Took longer than I thought to configure everything and set up a base project.
 
-1. Get login functionality working with "regular" (not integrated with facebook/twitter/etc) working
+1. Get login functionality working with "regular" user (not integrated with facebook/twitter/etc) working... DONE
 2. Create friending ability (FriendUser join table between two different users)
-3. Create controllers for updating geolocation (location API)
+3. Create controllers for updating geolocation (location API)... DONE
 4. Integrate with facebook/twitter/etc
