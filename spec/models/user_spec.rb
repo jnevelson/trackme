@@ -25,7 +25,15 @@ describe User do
     @user = Factory.build(:user)
     params = { :latitude => 37.75412, :longitude => -122.45121 }
     @user.post_location(params)
-    @user.locations.first.longitude.should equal params[:longitude]
+    @user.locations.first.longitude.should == params[:longitude]
+  end
+
+  it "should create friends" do
+    @user = Factory(:user)
+    @friend = Factory(:friend)
+
+    @user.add_friend(@friend)
+    @user.friends.first.should == @friend
   end
 
 end

@@ -7,4 +7,11 @@ FactoryGirl.define do
     password 'blah'
   end
 
+  factory :friend, :class => "User" do
+    first_name 'my'
+    last_name 'friend'
+    email 'friend@email.com'
+    password 'friend'
+  end
+
 end
