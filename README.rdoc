@@ -1,8 +1,8 @@
+===WORKING
+* User login and authentication
+* Location posting via /locations (required params are api_key, longitude, latitude)
+
 ===TODO
-
-There's still nothing functional here. Took longer than I thought to configure everything and set up a base project.
-
-1. Get login functionality working with "regular" user (not integrated with facebook/twitter/etc) working... DONE
-2. Create friending ability (FriendUser join table between two different users)
-3. Create controllers for updating geolocation (location API)... DONE
-4. Integrate with facebook/twitter/etc
+* Views for location tracking/mapping
+* "Rules" system for viewing other people's location info
+* Facebook/Twitter/etc integration
