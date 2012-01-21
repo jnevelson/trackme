@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   before_save :generate_api_key!
 
   def post_location(params = {})
-    Location.create!(:user =>self, :longitude => params[:longitude], :latitude => params[:latitude])
+    Location.create!(:user => self, :longitude => params[:longitude], :latitude => params[:latitude])
   end
 
   private
