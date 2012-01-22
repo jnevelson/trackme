@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
   def create
     if @user
       begin
-        @user.post_location(params)
+        @user.add_location(params)
       rescue => e
         @errors << e.message
       end
