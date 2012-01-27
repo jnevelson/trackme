@@ -27,14 +27,11 @@ describe User do
     @api.should == @user.api_key
   end
 
-  # TODO
-  # test failing due to rounding inaccuracy. we need to figure out how to store accurate floats
-  # check out https://github.com/andre/geokit-rails
   it "should create new locations belonging to current user" do
-   @user = Factory.build(:user)
-   params = { :latitude => 37.75412, :longitude => -122.45121 }
-   @user.add_location(params)
-   @user.locations.first.longitude.should == params[:longitude].to_s
+    @user = Factory.build(:user)
+    params = { :latitude => 37.75412, :longitude => -122.45121 }
+    @user.add_location(params)
+    @user.locations.first.longitude.should == params[:longitude].to_s
   end
 
   it "should create friends" do
