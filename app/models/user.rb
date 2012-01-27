@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :class_name => "User"
   has_many :friendships, :foreign_key => "user_id"
 
-  before_save :generate_api_key!
+  before_create :generate_api_key
 
   def add_location(params = {})
     Location.create! :user => self, :longitude => params[:longitude], :latitude => params[:latitude]
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def generate_api_key!
+  def generate_api_key
     key = [Time.now, (1..10).map { rand.to_s }].join("--")
     self.api_key = Digest::SHA1.hexdigest(key)
   end

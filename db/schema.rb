@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121232403) do
+ActiveRecord::Schema.define(:version => 20120127054813) do
 
   create_table "friendships", :force => true do |t|
     t.integer "user_id"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20120121232403) do
 
   create_table "locations", :force => true do |t|
     t.integer  "user_id"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.string   "latitude"
+    t.string   "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
