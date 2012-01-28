@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable,
+    :rememberable, :trackable, :validatable, :token_authenticatable
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me
 
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :class_name => "User"
   has_many :friendships, :foreign_key => "user_id"
 
-  before_create :generate_api_key
+  before_create :ensure_authentication_token
 
   def add_location(params = {})
     Location.create! :user => self, :longitude => params[:longitude], :latitude => params[:latitude]
@@ -19,13 +19,6 @@ class User < ActiveRecord::Base
 
   def add_friend(user)
     Friendship.create! :user => self, :friend => user
-  end
-
-  private
-
-  def generate_api_key
-    key = [Time.now, (1..10).map { rand.to_s }].join("--")
-    self.api_key = Digest::SHA1.hexdigest(key)
   end
 
 end

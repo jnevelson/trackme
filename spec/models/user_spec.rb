@@ -15,16 +15,16 @@ describe User do
 
   it "should generate an api key when the user is created" do
     @user = User.create!(attributes)
-    @user.api_key.should_not equal(nil)
+    @user.authentication_token.should_not equal(nil)
   end
 
   it "should not regenerate API keys on save" do
     @user = User.create!(attributes)
-    @api = @user.api_key
+    @api = @user.authentication_token
 
     @user.save!
 
-    @api.should == @user.api_key
+    @api.should == @user.authentication_token
   end
 
   it "should create new locations belonging to current user" do
