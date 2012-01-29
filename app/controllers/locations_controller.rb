@@ -17,8 +17,8 @@ class LocationsController < ApplicationController
   private
 
   def validate_user
-    @user = User.find_by_api_key(params[:api_key])
-    @errors << "API key is not valid!" unless @user
+    @user = User.find_by_authentication_token(params[:auth_token])
+    @errors << "Authentication token is not valid!" unless @user
   end
 
   def initialize_errors
