@@ -1,0 +1,24 @@
+require 'spec_helper'
+
+describe Event do
+  
+  it "should allow for owners" do
+    user = Factory(:user)
+    event = user.create_event :start_time => Time.now + 2.hours, :end_time => Time.now + 4.hours
+    user.owned_events.first.should == event
+  end
+
+  it "should allow for followers" do
+    user = Factory(:user)
+    user1 = Factory(:user1)
+    friend = Factory(:friend)
+    event = Factory(:event1, :owner => user)
+    event.add_follower(user1)
+    event.add_follower(friend)
+
+    event.owner.should == user
+    event.followers.size.should == 2
+    event.followers.first.should == user1
+  end
+
+end
