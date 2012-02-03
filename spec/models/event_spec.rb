@@ -21,4 +21,26 @@ describe Event do
     event.followers.first.should == user1
   end
 
+  it "should default to current time if start_time is nil" do
+    owner = Factory(:user)
+    event = Event.create! :end_time => Time.now + 4.hours, :owner => owner
+
+    event.start_time.should_not be_nil
+  end
+
+  it "should not allow for end_time to be before start_time" do
+    owner = Factory(:user)
+    expect { Event.create! :owner => owner, :start_time => Time.now + 2.hours, :end_time => Time.now }.should raise_error
+  end
+
+  it "should return events currently taking place" do
+    owner = Factory(:user)
+    current = Event.create! :owner => owner, :start_time => Time.now - 1.hour, :end_time => Time.now + 1.hours
+    not_current = Event.create! :owner => owner, :start_time => Time.now + 1.hour, :end_time => Time.now + 2.hours
+
+    current_events = Event.current_events
+    current_events.include?(current).should be_true
+    current_events.include?(not_current).should be_false
+  end
+
 end
