@@ -19,8 +19,8 @@ class LocationsController < ApplicationController
   protected
 
   def ensure_params_exist
-    missing_params = [:auth_token, :latitude, :longitude].select { |p| !params.keys.include?(p) }
-    return unless missing_params.blank?
+    missing_params = ["auth_token", "latitude", "longitude"].select { |p| !params.keys.include?(p) }
+    return if missing_params.blank?
     render :json => { :success => false, :message => "Missing parameters: #{missing_params.join(", ")}" }
   end
 
