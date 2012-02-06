@@ -7,7 +7,6 @@ class LocationsController < ApplicationController
       begin
         user.add_location(params)
         render_json(true, "Location posted!")
-        return
       rescue => e
         render_json(false, e.message)
       end
