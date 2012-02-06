@@ -6,5 +6,6 @@ Trackme::Application.routes.draw do
   resources :users
 
   resources :locations
+  resources :sessions
 
 end
