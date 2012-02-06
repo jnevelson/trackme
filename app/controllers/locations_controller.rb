@@ -6,13 +6,13 @@ class LocationsController < ApplicationController
     if user = User.find_by_authentication_token(params[:auth_token])
       begin
         user.add_location(params)
-        render :json => { :success => true, :message => "Location posted!" }
+        render_json(true, "Location posted!")
         return
       rescue => e
-        render_error(e.message)
+        render_json(false, e.message)
       end
     else
-      render_error("User not found!")
+      render_json(false, "User not found!")
     end
   end
 
@@ -20,12 +20,7 @@ class LocationsController < ApplicationController
 
   def ensure_params_exist
     missing_params = ["auth_token", "latitude", "longitude"].select { |p| !params.keys.include?(p) }
-    return if missing_params.blank?
-    render :json => { :success => false, :message => "Missing parameters: #{missing_params.join(", ")}" }
-  end
-
-  def render_error(message)
-    render :json => { :sucess => false, :message => message }
+    render_json(false, "Missing parameters: #{missing_params.join(", ")}") unless missing_params.empty?
   end
 
 end

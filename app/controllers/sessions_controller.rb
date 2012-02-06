@@ -17,12 +17,12 @@ class SessionsController < ApplicationController
 
   def ensure_params_exist
     return unless params[:email].blank? || params[:password].blank?
-    render :json => { :success => false, :message => "Missing login credentials!", :status => 422 }
+    render_json(false, "Missing login credentials!")
   end
 
   def invalid_login_attempt
     warden.custom_failure!
-    render :json => { :success => false, :message => "Invalid login credentials!", :status => 401 }
+    render_json(false, "Invalid login credentials!")
   end
 
 end
