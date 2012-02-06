@@ -1,28 +1,31 @@
 class LocationsController < ApplicationController
 
-  before_filter :initialize_errors, :validate_user
+  before_filter :ensure_params_exist
 
   def create
-    if @user
+    if user = User.find_by_authentication_token(params[:auth_token])
       begin
-        @user.add_location(params)
+        user.add_location(params)
+        render :json => { :success => true, :message => "Location posted!" }
+        return
       rescue => e
-        @errors << e.message
+        render_error(e.message)
       end
+    else
+      render_error("User not found!")
     end
-    status = @errors.empty? ? "Location posted!\n" : "Error posting location: #{@errors}\n"
-    render :text => status
   end
 
-  private
+  protected
 
-  def validate_user
-    @user = User.find_by_authentication_token(params[:auth_token])
-    @errors << "Authentication token is not valid!" unless @user
+  def ensure_params_exist
+    missing_params = [:auth_token, :latitude, :longitude].select { |p| !params.keys.include?(p) }
+    return unless missing_params.blank?
+    render :json => { :success => false, :message => "Missing parameters: #{missing_params.join(", ")}" }
   end
 
-  def initialize_errors
-    @errors = []
+  def render_error(message)
+    render :json => { :sucess => false, :message => message }
   end
 
 end
