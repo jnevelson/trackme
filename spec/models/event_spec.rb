@@ -18,7 +18,7 @@ describe Event do
 
     event.owner.should == user
     event.followers.size.should == 2
-    event.followers.first.should == user1
+    event.followers.should == [user1, friend]
   end
 
   it "should default to current time if start_time is nil" do
@@ -38,9 +38,7 @@ describe Event do
     current = Event.create! :owner => owner, :start_time => Time.now - 1.hour, :end_time => Time.now + 1.hours
     not_current = Event.create! :owner => owner, :start_time => Time.now + 1.hour, :end_time => Time.now + 2.hours
 
-    current_events = Event.current_events
-    current_events.include?(current).should be_true
-    current_events.include?(not_current).should be_false
+    Event.current_events.should == [current]
   end
 
 end
