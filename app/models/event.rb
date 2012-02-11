@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
 
   before_validation :set_start_time
 
-  validates_presence_of :owner, :start_time, :end_time
+  validates_presence_of :owner, :end_time
   validate :time_continuity
 
   def add_follower(user)
@@ -25,7 +25,11 @@ class Event < ActiveRecord::Base
   end
 
   def time_continuity
-    raise "Start time must be before end time!" if end_time < start_time
+    # have to check for end_time because for some reason activerecord
+    # calls this method first before validating presence
+    if end_time && start_time > end_time
+      errors.add(:start_time, "Start time must be before end time!")
+    end
   end
 
 end
