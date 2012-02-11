@@ -28,14 +28,14 @@ describe User do
   end
 
   it "should create new locations belonging to current user" do
-    @user = Factory.build(:user)
+    @user = Factory.build(:user1)
     params = { :latitude => 37.75412, :longitude => -122.45121 }
     @user.add_location(params)
     @user.locations.first.longitude.should == params[:longitude].to_s
   end
 
   it "should create friends" do
-    @user = Factory(:user)
+    @user = Factory(:user1)
     @friend = Factory(:friend)
 
     @user.add_friend(@friend)
