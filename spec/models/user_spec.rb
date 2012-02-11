@@ -42,4 +42,15 @@ describe User do
     @user.friends.first.should == @friend
   end
 
+  it "should return current followed events" do
+    user1 = Factory(:user1)
+    user2 = Factory(:user2)
+    user3 = Factory(:user3)
+    event1 = Factory(:event1, :owner => user1, :followers => [user2, user3])
+    event2 = Factory(:event1, :owner => user1, :followers => [user3])
+
+    user2.current_followed_events.should == [event1]
+    user3.current_followed_events.should == [event1, event2]
+  end
+
 end

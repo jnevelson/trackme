@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     Event.create! :owner => self, :start_time => start_time, :end_time => params[:end_time]
   end
 
+  def current_followed_events
+    Event.current_events.select { |ce| ce.followers.include?(self) }
+  end
+
 end

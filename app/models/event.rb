@@ -13,6 +13,10 @@ class Event < ActiveRecord::Base
     followers << user
   end
 
+  def locations
+    owner.locations.select { |l| l.created_at > start_time }
+  end
+
   def self.current_events
     now = Time.now
     Event.where("start_time < ? AND end_time > ?", now, now)

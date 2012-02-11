@@ -41,4 +41,15 @@ describe Event do
     Event.current_events.should == [current]
   end
 
+  it "should return current locations" do
+    user1 = Factory(:user1)
+    user2 = Factory(:user2)
+    event = Factory(:event1, :owner => user1, :followers => [user2])
+    user1.add_location :longitude => 23.345, :latitude => 54.5676
+    user1.add_location :longitude => 23.456, :latitude => 54.6547
+
+    user2.current_followed_events.size.should == 1
+    user2.current_followed_events.first.locations.size.should == 2
+  end
+
 end
