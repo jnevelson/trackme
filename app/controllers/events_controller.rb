@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   protected
 
   def followers
-    params[:followers] ? params[:followers].split(",").map { |f| User.find_by_id(f) }.compact : []
+    params[:followers] ? params[:followers].split(",").map { |f| User.find(f) } : []
   end
 
   def create_time(start_end)
