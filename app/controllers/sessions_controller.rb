@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
 
-  before_filter :ensure_params_exist
-
   def create
     if user = User.find_for_database_authentication(:email => params[:email])
       if user.valid_password?(params[:password])
@@ -14,11 +12,6 @@ class SessionsController < ApplicationController
   end
 
   protected
-
-  def ensure_params_exist
-    return unless params[:email].blank? || params[:password].blank?
-    render_json(false, "Missing login credentials!")
-  end
 
   def invalid_login_attempt
     warden.custom_failure!
