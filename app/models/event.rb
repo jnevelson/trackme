@@ -32,7 +32,7 @@ class Event < ActiveRecord::Base
     # have to check for end_time because for some reason activerecord
     # calls this method first before validating presence
     if end_time && start_time > end_time
-      errors.add(:start_time, "Start time must be before end time!")
+      errors.add(:time_continuity, "Start time must be before end time!")
     end
   end
 
