@@ -49,8 +49,8 @@ describe User do
     event1 = Factory(:event1, :owner => user1, :followers => [user2, user3])
     event2 = Factory(:event1, :owner => user1, :followers => [user3])
 
-    user2.current_followed_events.should == [event1]
-    user3.current_followed_events.should == [event1, event2]
+    user2.followed_events.should == [event1]
+    user3.followed_events.should == [event1, event2]
   end
 
 end

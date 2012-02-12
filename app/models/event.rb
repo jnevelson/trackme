@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   end
 
   def locations
-    owner.locations.select { |l| l.created_at > start_time }
+    owner.locations.where("created_at > ?", start_time)
   end
 
   def self.current_events

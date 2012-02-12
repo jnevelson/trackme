@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :class_name => "User"
   has_many :friendships, :foreign_key => "user_id"
   has_many :owned_events, :foreign_key => "owner_id", :class_name => "Event"
-  has_many :followed_events, :through => :user_events, :source => :event
+  has_many :followed_events,
+      :through => :user_events,
+      :source => :event,
+      :conditions => proc { ["user_id = ?", self.id] }
   has_many :user_events
 
   before_create :ensure_authentication_token
@@ -28,10 +31,6 @@ class User < ActiveRecord::Base
     raise "Must include end_time!" unless params[:end_time]
     start_time = params[:start_time] ? params[:start_time] : Time.now
     Event.create! :owner => self, :start_time => start_time, :end_time => params[:end_time]
-  end
-
-  def current_followed_events
-    Event.current_events.select { |ce| ce.followers.include?(self) }
   end
 
 end

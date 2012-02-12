@@ -48,8 +48,8 @@ describe Event do
     user1.add_location :longitude => 23.345, :latitude => 54.5676
     user1.add_location :longitude => 23.456, :latitude => 54.6547
 
-    user2.current_followed_events.size.should == 1
-    user2.current_followed_events.first.locations.size.should == 2
+    user2.followed_events.size.should == 1
+    user2.followed_events.first.locations.size.should == 2
   end
 
 end
