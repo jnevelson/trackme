@@ -18,6 +18,20 @@ class EventsController < ApplicationController
     end
   end
 
+  def add_follower
+    if user = User.find_by_authentication_token(params[:auth_token])
+      begin
+        event = Event.find(params[:event])
+        followers.each { |f| event.add_follower(f) }
+        render :json => { :success => true, :event => event.id }
+      rescue => e
+        render_json(false, e.message)
+      end
+    else
+      render_json(false, "Invalid auth_token")
+    end
+  end
+
   protected
 
   def followers

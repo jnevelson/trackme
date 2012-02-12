@@ -9,4 +9,6 @@ Trackme::Application.routes.draw do
   resources :sessions
   resources :events
 
+  match 'events/add_follower' => 'events#add_follower'
+
 end
