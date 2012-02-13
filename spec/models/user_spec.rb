@@ -34,14 +34,6 @@ describe User do
     @user.locations.first.longitude.should == params[:longitude].to_s
   end
 
-  it "should create friends" do
-    @user = Factory(:user1)
-    @friend = Factory(:friend)
-
-    @user.add_friend(@friend)
-    @user.friends.first.should == @friend
-  end
-
   it "should return current followed events" do
     user1 = Factory(:user1)
     user2 = Factory(:user2)
