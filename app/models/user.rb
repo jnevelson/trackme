@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email
 
   has_many :locations
-  has_many :friends, :through => :friendships, :class_name => "User"
-  has_many :friendships, :foreign_key => "user_id"
+  # has_many :friends, :through => :friendships
+  # has_many :friendships#, :conditions => proc { ["user_id = ? or friend_id = ?", self.id, self.id] }
+  # has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  # has_many :inverse_friendships, :foreign_key => "friend_id", :class_name => "Friendship"
   has_many :owned_events, :foreign_key => "owner_id", :class_name => "Event"
   has_many :followed_events,
       :through => :user_events,
@@ -18,6 +20,14 @@ class User < ActiveRecord::Base
   has_many :user_events
 
   before_create :ensure_authentication_token
+
+  def friends
+    # EVIL EVIL EVIL... but I don't know how else to do it for the time being.
+    # friend relations are commented out at the top, as well as "inverse_friend" relations
+    friendships1 = Friendship.where("user_id = ?", self.id).map(&:friend)
+    friendships2 = Friendship.where("friend_id = ?", self.id).map(&:user)
+    friendships1 + friendships2
+  end
 
   def add_location(params = {})
     Location.create! :user => self, :longitude => params[:longitude], :latitude => params[:latitude]
