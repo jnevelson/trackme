@@ -29,7 +29,6 @@ class User < ActiveRecord::Base
   end
 
   def create_event(params = {})
-    raise "Must include end_time!" unless params[:end_time]
     start_time = params[:start_time] ? params[:start_time] : Time.now
     Event.create! :owner => self, :start_time => start_time, :end_time => params[:end_time]
   end
