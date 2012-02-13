@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   validate :time_continuity
 
   def add_follower(user)
+    raise "Cannot follow your own event!" if user == owner
     followers << user
   end
 
