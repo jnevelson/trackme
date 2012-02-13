@@ -10,7 +10,7 @@ describe Friendship do
     user.friends.first.should == friend
   end
   
-  it "should friend people unidirectionally" do
+  it "should friend people bidirectionally" do
     user1 = Factory(:user1)
     user2 = Factory(:user2)
     user1.add_friend(user2)
