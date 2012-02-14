@@ -34,7 +34,6 @@ class User < ActiveRecord::Base
   end
 
   def add_friend(user)
-    raise "Cannot friend yourself!" if user == self
     Friendship.create! :user => self, :friend => user
   end
 
