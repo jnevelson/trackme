@@ -1,14 +1,3 @@
-Facebook
-=
-* App ID  156046454510351
-* App Secret:	265cd82e9d503e838cc6784052c80360(reset)
+This was originally intended as a geo-location app a la Highlight/GlassMap/Glancee/etc, but they got there first, so this may as well be open-sourced. Mainly just contains the basic object-model, as well as a few API-endpoints.
 
-Domain names
-=
-* phouned.com(purchased 2/12/12)
-  * phound.com is taken, but currently unused
-* trackme/track.me (taken)
-  * way too expensive
-* greply (taken)
-  * redirects to gmail.com
-  * looks to be based out LA
+Also, the various keys that were previously shown in this repo have all been invalidated. Good lesson in not storing this type of info in source control.
