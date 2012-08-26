@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   def create
     if user = User.find_by_authentication_token(params[:auth_token])
       begin

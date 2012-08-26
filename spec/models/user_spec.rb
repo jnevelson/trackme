@@ -28,18 +28,18 @@ describe User do
   end
 
   it "should create new locations belonging to current user" do
-    @user = Factory.build(:user1)
+    @user = FactoryGirl.build(:user1)
     params = { :latitude => 37.75412, :longitude => -122.45121 }
     @user.add_location(params)
     @user.locations.first.longitude.should == params[:longitude].to_s
   end
 
   it "should return current followed events" do
-    user1 = Factory(:user1)
-    user2 = Factory(:user2)
-    user3 = Factory(:user3)
-    event1 = Factory(:event1, :owner => user1, :followers => [user2, user3])
-    event2 = Factory(:event1, :owner => user1, :followers => [user3])
+    user1 = FactoryGirl.build(:user1)
+    user2 = FactoryGirl.build(:user2)
+    user3 = FactoryGirl.build(:user3)
+    event1 = FactoryGirl.build(:event1, :owner => user1, :followers => [user2, user3])
+    event2 = FactoryGirl.build(:event1, :owner => user1, :followers => [user3])
 
     user2.followed_events.should == [event1]
     user3.followed_events.should == [event1, event2]

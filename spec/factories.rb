@@ -28,4 +28,13 @@ FactoryGirl.define do
     password 'friend'
   end
 
+  factory :friendship do
+  end
+
+  factory :event1, :class => "Event" do
+    description 'test description'
+    start_time Time.now
+    end_time Time.now + 4.hours
+  end
+
 end

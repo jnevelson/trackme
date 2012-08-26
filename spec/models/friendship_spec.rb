@@ -3,16 +3,16 @@ require 'spec_helper'
 describe Friendship do
 
   it "should create friends" do
-    user = Factory(:user1)
-    friend = Factory(:friend)
+    user = FactoryGirl.build(:user1)
+    friend = FactoryGirl.build(:friend)
 
     user.add_friend(friend)
     user.friends.first.should == friend
   end
   
   it "should friend people bidirectionally" do
-    user1 = Factory(:user1)
-    user2 = Factory(:user2)
+    user1 = FactoryGirl.build(:user1)
+    user2 = FactoryGirl.build(:user2)
     user1.add_friend(user2)
 
     user1.friends.should == [user2]
